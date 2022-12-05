@@ -6,10 +6,10 @@ export const getCurrentUser=()=>{
 
 export const login = (userObject) => {
    
-    return fetch(`api/userprofile/getbyemail?email=${userObject.email}`)
+    return fetch(`https://localhost:44396/api/User/GetByUNPW?username=${userObject.username}&password=${userObject.password}"`)
       .then((r) => r.json())
       .then((userObjFromDB) => {
 
-        localStorage.setItem("gifterUser", JSON.stringify(userObjFromDB));
+        localStorage.setItem("pantryUser", JSON.stringify(userObjFromDB));
       })
   };

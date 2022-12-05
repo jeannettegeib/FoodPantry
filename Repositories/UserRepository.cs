@@ -3,24 +3,19 @@ using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using FoodPantry.Models;
+using FoodPantry.Repositories;
 using Microsoft.AspNetCore.Routing;
 using Azure.Identity;
 
 namespace FoodPantry.Repositories
 {
-    public class usersRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
-        private readonly string _connectionString;
-        public usersRepository(IConfiguration configuration)
-        {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
-        }
+     
+        public UserRepository(IConfiguration configuration) :base(configuration) { }
+       
 
-        private SqlConnection Connection
-        {
-            get { return new SqlConnection(_connectionString); }
-        }
-
+    
         public List<User> GetAll()
         {
             using (var conn = Connection)
@@ -28,7 +23,7 @@ namespace FoodPantry.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT id, userType, email, username, password, phone, firstName, lasteName, familySize, foodTypeId, frequency FROM User";
+                    cmd.CommandText = @"SELECT id, userType, email, username, password, phone, firstName, lastName, familySize, foodTypeId, frequency FROM [User]";
                     var reader = cmd.ExecuteReader();
                     var users = new List<User>();
                     while (reader.Read())
@@ -79,7 +74,7 @@ namespace FoodPantry.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT id, userType, email, username, password, phone, firstName, lasteName, familySize, foodTypeId, frequency FROM User WHERE username = @UserName AND password = @PassWord";
+                    cmd.CommandText = @"SELECT id, userType, email, username, password, phone, firstName, lastName, familySize, foodTypeId, frequency FROM [User] WHERE username = @UserName AND password = @PassWord";
                     cmd.Parameters.AddWithValue("@UserName", username);
                     cmd.Parameters.AddWithValue("@PassWord", password);
                     var reader = cmd.ExecuteReader();
@@ -132,7 +127,7 @@ namespace FoodPantry.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO User (userType, email, username, password, phone, firstName, lasteName, familySize, foodTypeId, frequency) OUTPUT INSERTED.ID 
+                    cmd.CommandText = @"INSERT INTO [User] (userType, email, username, password, phone, firstName, lasteName, familySize, foodTypeId, frequency) OUTPUT INSERTED.ID 
                                         VALUES (@userType, @email, @username, @password, @phone, @firstName, @lasteName, @familySize, @foodTypeId, @frequency)";
                     cmd.Parameters.AddWithValue("@userType", user.userType);
                     cmd.Parameters.AddWithValue("@email", user.email);
