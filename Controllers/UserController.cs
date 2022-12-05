@@ -10,9 +10,9 @@ namespace FoodPantry.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository UserRepository)
         {
-            _userRepository = userRepository;
+            _userRepository = UserRepository;
         }
 
         [HttpGet]
@@ -31,6 +31,13 @@ namespace FoodPantry.Controllers
             }
             return Ok(user);
         }
+
+        [HttpPost] IActionResult Post(User user)
+        {
+            _userRepository.Add(user);
+            return CreatedAtAction("Get", new { id = user.id }, user);
+        }
+
 
 
     }

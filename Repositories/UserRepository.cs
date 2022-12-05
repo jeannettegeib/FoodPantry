@@ -28,7 +28,7 @@ namespace FoodPantry.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT id, userType, email, username, password, phone, firstName, lasteName, familySize, foodTypeId, frequency FROM users";
+                    cmd.CommandText = @"SELECT id, userType, email, username, password, phone, firstName, lasteName, familySize, foodTypeId, frequency FROM User";
                     var reader = cmd.ExecuteReader();
                     var users = new List<User>();
                     while (reader.Read())
@@ -79,7 +79,7 @@ namespace FoodPantry.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT id, userType, email, username, password, phone, firstName, lasteName, familySize, foodTypeId, frequency FROM users WHERE username = @UserName AND password = @PassWord";
+                    cmd.CommandText = @"SELECT id, userType, email, username, password, phone, firstName, lasteName, familySize, foodTypeId, frequency FROM User WHERE username = @UserName AND password = @PassWord";
                     cmd.Parameters.AddWithValue("@UserName", username);
                     cmd.Parameters.AddWithValue("@PassWord", password);
                     var reader = cmd.ExecuteReader();
@@ -116,14 +116,42 @@ namespace FoodPantry.Repositories
                         {
                             user.frequency = reader.GetInt32(reader.GetOrdinal("frequency"));
                         }
-                        
+
                     }
                     reader.Close();
                     return user;
                 }
-            }    
+            }
 
         }
 
+        public void Add(User user)
+        {
+           using (var conn=Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO User (userType, email, username, password, phone, firstName, lasteName, familySize, foodTypeId, frequency) OUTPUT INSERTED.ID 
+                                        VALUES (@userType, @email, @username, @password, @phone, @firstName, @lasteName, @familySize, @foodTypeId, @frequency)";
+                    cmd.Parameters.AddWithValue("@userType", user.userType);
+                    cmd.Parameters.AddWithValue("@email", user.email);
+                    cmd.Parameters.AddWithValue("@username", user.username);
+                    cmd.Parameters.AddWithValue("@password", user.password);
+                    cmd.Parameters.AddWithValue("@phone", user.phone);
+                    cmd.Parameters.AddWithValue("@firstName", user.firstName);
+                    cmd.Parameters.AddWithValue("@lastName", user.lastName);
+                    cmd.Parameters.AddWithValue("@familySize", user.familySize);
+                    cmd.Parameters.AddWithValue("@foodTypeId", user.foodTypeId);
+                    cmd.Parameters.AddWithValue("@frequency", user.frequency);
+
+                    user.id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+
+
     }
 }
+
