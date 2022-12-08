@@ -7,5 +7,6 @@ namespace FoodPantry.Repositories
     {
         public List<User> GetAll();
         public User getUserByUNPW(string username, string password);
+        public User GetUserById(int id);
     }
 }

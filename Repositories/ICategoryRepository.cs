@@ -6,5 +6,6 @@ namespace FoodPantry.Repositories
     public interface ICategoryRepository
     {
         public List<Category> GetAll();
+        public Category GetCategoryByIdWithItems(int categoryId);
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FoodPantry.Repositories;
 using FoodPantry.Models;
+using System.Security.Permissions;
 
 namespace FoodPantry.Controllers
 {
@@ -26,6 +27,17 @@ namespace FoodPantry.Controllers
         {
             var user = _userRepository.getUserByUNPW(username, password);
             if (username == null || password == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var user=_userRepository.GetUserById(id);
+            if (user==null)
             {
                 return NotFound();
             }

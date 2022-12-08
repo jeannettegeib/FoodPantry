@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FoodPantry.Repositories;
+using System.Security.Permissions;
 
 namespace FoodPantry.Controllers
 {
@@ -17,6 +18,15 @@ namespace FoodPantry.Controllers
         public IActionResult Get()
         {
             return Ok(_categoryRepository.GetAll());    
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var category = _categoryRepository.GetCategoryByIdWithItems(id);
+            if (category==null)
+            { return NotFound(); }
+            return Ok(category);
         }
     }
 }

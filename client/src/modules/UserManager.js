@@ -5,7 +5,7 @@ export const getCurrentUser=()=>{
 
 export const login = (userObject) => {
    
-    return fetch(`https://localhost:44396/api/User/GetByUNPW?username=${userObject.username}&password=${userObject.password}`)
+    return fetch(`https://localhost:5001/api/User/GetByUNPW?username=${userObject.username}&password=${userObject.password}`)
       .then((r) => r.json())
       .then((userObjFromDB) => {
 
@@ -13,3 +13,8 @@ export const login = (userObject) => {
       
       })
   };
+
+  export const getUserById=(id)=>{
+    return fetch(`https://localhost:5001/api/User/${id}`)
+    .then(r=>r.json())
+  }

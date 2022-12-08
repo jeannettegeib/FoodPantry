@@ -13,7 +13,7 @@ namespace FoodPantry.Models
         public int FiveToSixPeople { get; set; }
         public int SevenToEightPeople { get; set; }
         public int NinePlusPeople { get; set; }
-        public List<Item> Items { get; set; }
+        public List<Item> Items { get; set; } = new List<Item>();
     
     }
 }

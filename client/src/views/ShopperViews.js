@@ -1,13 +1,11 @@
-import { Outlet, Route, Routes } from "react-router-dom"
-export const ShopperViews=()=>{
+import { Outlet, Route, Routes } from "react-router-dom";
+import {ShoppingList} from "../components/ShoppingList"
+
+export const ShopperViews=({thisUser})=>{
+    
     return (
         <Routes>
-		<Route path="/" element={
-            <>
-            <h1>You are an Shopper!</h1>
-            <Outlet />
-            </>
-        }>
+		<Route path="/shop/:shopperId" element={<ShoppingList />}>
         </Route>
         </Routes>
     )

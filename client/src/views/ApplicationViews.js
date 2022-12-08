@@ -22,13 +22,13 @@ export const ApplicationViews=()=>{
         ) 
         }
     if(pantryUserObject.userType === 1){
-        return <AdminViews />
+        return <AdminViews thisUser={pantryUserObject}/>
     }
     if (pantryUserObject.userType === 2){
-        return <VolunteerViews />
+        return <VolunteerViews thisUser={pantryUserObject}/>
     }
     if (pantryUserObject.userType === 3){
-        return <ShopperViews />
+        return <ShopperViews thisUser={pantryUserObject}/>
     }
     
 };

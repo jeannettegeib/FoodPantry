@@ -120,6 +120,60 @@ namespace FoodPantry.Repositories
 
         }
 
+
+        public User GetUserById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT id, userType, email, username, password, phone, firstName, lastName, familySize, foodTypeId, frequency FROM [User] WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);                    
+                    var reader = cmd.ExecuteReader();
+
+                    User user = null;
+                    if (reader.Read())
+                    {
+                        user = new User()
+                        {
+                            id = reader.GetInt32(reader.GetOrdinal("id")),
+                            userType = reader.GetInt32(reader.GetOrdinal("userType")),
+                            username = reader.GetString(reader.GetOrdinal("username")),
+                            password = reader.GetString(reader.GetOrdinal("password")),
+                            firstName = reader.GetString(reader.GetOrdinal("firstName")),
+                            lastName = reader.GetString(reader.GetOrdinal("lastName")),
+                        };
+                        if (!reader.IsDBNull(reader.GetOrdinal("email")))
+                        {
+                            user.email = reader.GetString(reader.GetOrdinal("email"));
+                        }
+                        if (!reader.IsDBNull(reader.GetOrdinal("phone")))
+                        {
+                            user.phone = reader.GetString(reader.GetOrdinal("phone"));
+                        }
+                        if (!reader.IsDBNull(reader.GetOrdinal("familySize")))
+                        {
+                            user.familySize = reader.GetInt32(reader.GetOrdinal("familySize"));
+                        }
+                        if (!reader.IsDBNull(reader.GetOrdinal("foodTypeId")))
+                        {
+                            user.foodTypeId = reader.GetInt32(reader.GetOrdinal("foodTypeId"));
+                        }
+                        if (!reader.IsDBNull(reader.GetOrdinal("frequency")))
+                        {
+                            user.frequency = reader.GetInt32(reader.GetOrdinal("frequency"));
+                        }
+
+                    }
+                    reader.Close();
+                    return user;
+                }
+            }
+
+        }
+
+
         public void Add(User user)
         {
            using (var conn=Connection)
