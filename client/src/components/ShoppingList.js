@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { UncontrolledAccordion } from "reactstrap";
 import { getAllCategories } from "../modules/Category-ItemManager";
 import { getCurrentUser, getUserById } from "../modules/UserManager";
@@ -25,7 +25,7 @@ export const ShoppingList=()=>{
     return(
     <>
         <h1>Hi {shopper.firstName} {shopper.lastName}</h1>
-        
+        <form>
         {categoryList.map((category)=>
             {
                 return(
@@ -35,12 +35,14 @@ export const ShoppingList=()=>{
                     key = {`category--${category.id}`}
                     category = {category}
                     familySize = {shopper.familySize}
-                    itemList = {category.items} />
+                     />
                     </UncontrolledAccordion>
                     </>         
             )
             }
             )}
+
+        </form>
         
     </>
     )

@@ -32,6 +32,7 @@ namespace FoodPantry
             services.AddControllers();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FoodPantry", Version = "v1" });

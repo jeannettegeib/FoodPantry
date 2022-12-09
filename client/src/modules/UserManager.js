@@ -1,6 +1,7 @@
 export const getCurrentUser=()=>{
     const currentUser = localStorage.getItem("pantryUser");
-    return currentUser;
+    const pantryUserObject=JSON.parse(currentUser)
+    return pantryUserObject;
 };
 
 export const login = (userObject) => {

@@ -44,11 +44,11 @@ namespace FoodPantry.Controllers
             return Ok(user);
         }
 
-        //[HttpPost] IActionResult Post(User user)
-        //{
-        //    _userRepository.Add(user);
-        //    return CreatedAtAction("Get", new { id = user.id }, user);
-        //}
+       //[HttpPost] IActionResult Post(User user)
+       //{
+       //    _userRepository.Add(user);
+       //    return CreatedAtAction("Get", new { id = user.id }, user);
+       // }
 
 
 

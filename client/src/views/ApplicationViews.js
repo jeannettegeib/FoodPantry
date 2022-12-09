@@ -8,8 +8,8 @@ import { ShopperViews } from "./ShopperViews";
 
 export const ApplicationViews=()=>{
     const [isLoggedIn, setIsLoggedIn]=useState(false)
-    const pantryUser = getCurrentUser();
-    const pantryUserObject=JSON.parse(pantryUser);
+    const pantryUserObject = getCurrentUser();
+
 
     if(!pantryUserObject){
         return(
