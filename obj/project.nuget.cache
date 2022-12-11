@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "l/eLNRRJ/lCXCZz2xd5FP+3gNo/vfwK4hmfBDnGJjq1tNFTYjd20f/QxQ8TUyqsDskD3GNHJ3RQseVoGCYK39Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Jeannette\\workspace\\FoodPantry\\FoodPantry.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jeannette\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.0.1\\microsoft.data.sqlclient.sni.runtime.5.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
