@@ -1,14 +1,12 @@
 import { Outlet, Route, Routes } from "react-router-dom"
+import { ListOrders } from "../components/ListOrders"
+
 export const VolunteerViews=()=>{
     return (
         <Routes>
-		<Route path="/" element={
-            <>
-            <h1>You are an Volunteer!</h1>
-            <Outlet />
-            </>
-        }>
-        </Route>
+		
+        <Route path="/" element={<ListOrders/>}></Route>
+        <Route path="/order/:orderId" element={}
         </Routes>
     )
 }

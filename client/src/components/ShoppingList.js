@@ -20,6 +20,9 @@ export const ShoppingList=()=>{
         .then((CategoryArray)=>{setCategoryList(CategoryArray)})
     },[])
 
+    const handleSubmitOrder=()=>{
+        
+    }
 
 
     return(
@@ -41,7 +44,7 @@ export const ShoppingList=()=>{
             )
             }
             )}
-
+            <button onClick={handleSubmitOrder}>Submit Order</button>
         </form>
         
     </>

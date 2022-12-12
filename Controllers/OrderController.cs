@@ -14,6 +14,12 @@ namespace FoodPantry.Controllers
             _orderRepository = orderRepository;
         }
 
+        [HttpGet]   
+        public IActionResult Get()
+        {
+            return Ok(_orderRepository.ListAllSubmittedOrders());
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {

@@ -8,3 +8,7 @@ export const OpenEmptyOrderForShopper =(order)=>{
     })
     .then(r=>r.json())
 }
+export const ListActiveOrders =()=>{
+    return fetch(`https://localhost:5001/api/Order`)
+    .then(r=>r.json())
+}

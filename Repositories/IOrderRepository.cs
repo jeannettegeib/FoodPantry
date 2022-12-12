@@ -1,4 +1,5 @@
 ﻿using FoodPantry.Models;
+using System.Collections.Generic;
 
 namespace FoodPantry.Repositories
 {
@@ -6,5 +7,6 @@ namespace FoodPantry.Repositories
     {
         public void OpenEmptyOrder(Order order);
         public Order GetOrderById(int orderId);
+        public List<Order> ListAllSubmittedOrders();
     }
 }

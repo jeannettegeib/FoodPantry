@@ -20,7 +20,9 @@ export const ScheduleShop = ()=>{
     const handleSaveButtonClick=(clickEvent)=>{
         
         OpenEmptyOrderForShopper(order)
-        .then(()=>{navigate(`/shop/${shopperId}`)});
+        .then((r)=>{
+            console.log(r);
+            navigate(`/shop/${shopperId}?order=${r.id}`)});
     }
 
 
