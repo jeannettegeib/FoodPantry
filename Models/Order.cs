@@ -14,4 +14,5 @@ namespace FoodPantry.Models
         public bool Complete { get; set; } = false;
         public List<Item> Items { get; set; } = new List<Item>();
     }
+    
 }

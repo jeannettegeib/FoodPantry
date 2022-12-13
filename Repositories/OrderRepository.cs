@@ -83,6 +83,25 @@ namespace FoodPantry.Repositories
             }
         }
 
+
+        public void SubmitOrder(Order order)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    DateTime now = DateTime.Now;
+
+                    cmd.CommandText = @"UPDATE [Order] SET orderSubmitted = @now WHERE id = @orderId";
+                    cmd.Parameters.AddWithValue("@orderId", order.Id);
+                    cmd.Parameters.AddWithValue("@now", now);
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
+
         public List<Order> ListAllSubmittedOrders()
         {
             using (var conn=Connection)
@@ -129,8 +148,25 @@ namespace FoodPantry.Repositories
                 }
 
             }
+
+        public void PostOrderItem(OrderItem orderItem)
+        {
+            using(var conn=Connection)
+            {
+                conn.Open();
+                using(var cmd=conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO OrderItem (orderId, itemId)
+                                    OUTPUT INSERTED.ID 
+                                    VALUES (@OrderId,@ItemId)";
+                    cmd.Parameters.AddWithValue("@OrderId", orderItem.OrderId);
+                    cmd.Parameters.AddWithValue("@ItemId", orderItem.ItemId);
+
+                }
+            }
         }
 
 
+        }
     }
 

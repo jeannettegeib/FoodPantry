@@ -35,5 +35,14 @@ namespace FoodPantry.Controllers
             _orderRepository.OpenEmptyOrder(order);
             return CreatedAtAction("Get", new { id = order.Id }, order);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult SubmitOrder(Order order)
+        {
+            _orderRepository.SubmitOrder(order);
+            return Ok(order);
+        }
+
+
     }
 }

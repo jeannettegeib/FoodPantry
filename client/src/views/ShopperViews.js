@@ -7,7 +7,7 @@ export const ShopperViews=({thisUser})=>{
     return (
         <Routes>
             <Route path="/" element={<ScheduleShop/>}></Route>
-		    <Route path="/shop/:shopperId" element={<ShoppingList />}></Route>
+		    <Route path="/shop/:orderId" element={<ShoppingList />}></Route>
         </Routes>
     )
 }

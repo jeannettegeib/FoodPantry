@@ -22,7 +22,7 @@ export const ScheduleShop = ()=>{
         OpenEmptyOrderForShopper(order)
         .then((r)=>{
             console.log(r);
-            navigate(`/shop/${shopperId}?order=${r.id}`)});
+            navigate(`/shop/${r.id}`)});
     }
 
 

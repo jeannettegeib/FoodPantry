@@ -2,26 +2,33 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UncontrolledAccordion } from "reactstrap";
 import { getAllCategories } from "../modules/Category-ItemManager";
+import { getOrderById, SubmitOrder } from "../modules/OrderManager";
 import { getCurrentUser, getUserById } from "../modules/UserManager";
 import { Category } from "./Category";
 
 export const ShoppingList=()=>{
     const [categoryList, setCategoryList]=useState([]);
-    const [shopper, setShopper]=useState({});
-    const {shopperId} = useParams();
+    const [order, setOrder]=useState({});
+    const [submit, setSubmit]=useState(false)
+    const shopper = getCurrentUser();
+    const orderId=useParams();
 
-    useEffect(()=>{
-        getUserById(shopperId)
-        .then((shopperObject)=>{setShopper(shopperObject)})
-    },[])
 
+  
     useEffect(()=>{
         getAllCategories()
         .then((CategoryArray)=>{setCategoryList(CategoryArray)})
     },[])
 
+    useEffect(()=>{
+        getOrderById(orderId)
+        .then((order)=>{setOrder(order)})
+    },[])
+
     const handleSubmitOrder=()=>{
-        
+        SubmitOrder(order);
+        setSubmit(true)
+
     }
 
 
@@ -38,6 +45,8 @@ export const ShoppingList=()=>{
                     key = {`category--${category.id}`}
                     category = {category}
                     familySize = {shopper.familySize}
+                    submitState={submit}
+                    orderId={order.id}
                      />
                     </UncontrolledAccordion>
                     </>         

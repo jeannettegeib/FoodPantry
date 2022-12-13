@@ -6,9 +6,10 @@ import {
     AccordionHeader,
     AccordionItem,
 } from 'reactstrap';
+import { submitCategoryItems } from "../modules/Category-ItemManager";
 
 
-export const Category = ({ category, familySize, itemList }) => {
+export const Category = ({ category, familySize, submitState, orderId }) => {
     const [itemQuantity, setItemQuantity] = useState({})
    
     let max = 0;
@@ -22,6 +23,17 @@ export const Category = ({ category, familySize, itemList }) => {
         setItemQuantity(burger)
    
     }, [])
+    useEffect(()=>{
+        for(let i=0; i<findMax(); i++ ){
+        let orderItem={
+            orderId:orderId,
+            itemId: itemQuantity[i]
+        }
+        if(submitState==true){
+            submitCategoryItems(orderItem)
+
+        }}
+    },[submitState])
 
     const findMax = () => {
 
