@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getOrderById } from "../modules/OrderManager";
+import { getOrderById, getOrderByIdWithItems } from "../modules/OrderManager";
 
 export const Order =()=>{
     const [order, setOrder]=useState({})

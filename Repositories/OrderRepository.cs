@@ -224,7 +224,7 @@ namespace FoodPantry.Repositories
                             Id = reader.GetInt32(reader.GetOrdinal("id")),
                             ShopperUserId= reader.GetInt32(reader.GetOrdinal("shopperUserId")),
                             OrderSubmitted=reader.GetDateTime(reader.GetOrdinal("orderSubmitted")),
-                            PickupDate= reader.GetDateTime(reader.GetOrdinal("orderSubmitted"))
+                            PickupDate= reader.GetDateTime(reader.GetOrdinal("pickupDate"))
 
                         };
                         if (!reader.IsDBNull(reader.GetOrdinal("employeeUserId")))
