@@ -8,7 +8,7 @@ export const Order =()=>{
     console.log(orderId);
 
     useEffect(()=>{
-        getOrderById(orderId)
+        getOrderByIdWithItems(orderId)
         .then((orderObject)=>{setOrder(orderObject)
         })                       
     },[])

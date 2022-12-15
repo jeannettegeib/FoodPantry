@@ -31,6 +31,6 @@ export const getOrderById=(orderId)=>{
 }
 
 export const getOrderByIdWithItems=(orderId)=>{
-    return fetch(`https://localhost:5001/api/Order/${orderId}`)
+    return fetch(`https://localhost:5001/api/Order/GetWithItems/${orderId}`)
     .then(r => r.json())
 }
