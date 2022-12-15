@@ -69,26 +69,35 @@ namespace FoodPantry.Repositories
                                 FiveToSixPeople = reader.GetInt32(reader.GetOrdinal("5_6people")),
                                 SevenToEightPeople = reader.GetInt32(reader.GetOrdinal("7_8people")),
                                 NinePlusPeople = reader.GetInt32(reader.GetOrdinal("9people")),
-                                Items = new List<Item>() { new Item {
+                                Items = new List<Item>() 
+                                
+                                
+                            };
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("ItemID")))
+                            {
+                                item = new Item
+                                {
                                     Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
                                     Name = reader.GetString(reader.GetOrdinal("item")),
-                                    CategoryId = reader.GetInt32(reader.GetOrdinal("ItemCategory")),
-                                }
-                                }
-                            };
-                            if (!reader.IsDBNull(reader.GetOrdinal("weight"))) { item.Weight = reader.GetDouble(reader.GetOrdinal("weight")); }
+                                    CategoryId = reader.GetInt32(reader.GetOrdinal("ItemCategory"))
+                                };
 
-                            if (!reader.IsDBNull(reader.GetOrdinal("foodTypeId")))
-                            {
-                                item.FoodTypeId = reader.GetInt32(reader.GetOrdinal("foodTypeId"));
-                            }
-                            if (!reader.IsDBNull(reader.GetOrdinal("image")))
-                            {
-                                item.Image = reader.GetString(reader.GetOrdinal("image"));
-                            }
-                            if (!reader.IsDBNull(reader.GetOrdinal("quantity")))
-                            {
-                                item.Quantity = reader.GetInt32(reader.GetOrdinal("quantity"));
+                                if (!reader.IsDBNull(reader.GetOrdinal("weight"))) { item.Weight = reader.GetDouble(reader.GetOrdinal("weight")); }
+
+                                if (!reader.IsDBNull(reader.GetOrdinal("foodTypeId")))
+                                {
+                                    item.FoodTypeId = reader.GetInt32(reader.GetOrdinal("foodTypeId"));
+                                }
+                                if (!reader.IsDBNull(reader.GetOrdinal("image")))
+                                {
+                                    item.Image = reader.GetString(reader.GetOrdinal("image"));
+                                }
+                                if (!reader.IsDBNull(reader.GetOrdinal("quantity")))
+                                {
+                                    item.Quantity = reader.GetInt32(reader.GetOrdinal("quantity"));
+                                }
+                                category.Items.Add(item);
                             }
 
                             categories.Add(category);
@@ -133,14 +142,36 @@ namespace FoodPantry.Repositories
                                 FiveToSixPeople = reader.GetInt32(reader.GetOrdinal("5_6people")),
                                 SevenToEightPeople = reader.GetInt32(reader.GetOrdinal("7_8people")),
                                 NinePlusPeople = reader.GetInt32(reader.GetOrdinal("9people")),
-                                Items = Items
+                                
+                            };
+                            Item item = new Item
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
+                                Name = reader.GetString(reader.GetOrdinal("item")),
+                                CategoryId = reader.GetInt32(reader.GetOrdinal("ItemCategory"))
                             };
 
-                            
+                            if (!reader.IsDBNull(reader.GetOrdinal("weight"))) { item.Weight = reader.GetDouble(reader.GetOrdinal("weight")); }
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("foodTypeId")))
+                            {
+                                item.FoodTypeId = reader.GetInt32(reader.GetOrdinal("foodTypeId"));
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("image")))
+                            {
+                                item.Image = reader.GetString(reader.GetOrdinal("image"));
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("quantity")))
+                            {
+                                item.Quantity = reader.GetInt32(reader.GetOrdinal("quantity"));
+                            }
+                            category.Items.Add(item);
+
+
                         }
                         else
                         {
-                            Items.Add(new Item()
+                            category.Items.Add(new Item()
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
                                 Name = reader.GetString(reader.GetOrdinal("item")),

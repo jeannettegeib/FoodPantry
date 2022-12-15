@@ -16,8 +16,8 @@ namespace FoodPantry.Repositories
                     cmd.CommandText = @"INSERT INTO OrderItem (orderId, itemId)
                                     OUTPUT INSERTED.ID 
                                     VALUES (@OrderId,@ItemId)";
-                    cmd.Parameters.AddWithValue("@OrderId", orderItem.OrderId);
-                    cmd.Parameters.AddWithValue("@ItemId", orderItem.ItemId);
+                    cmd.Parameters.AddWithValue("@OrderId", orderItem.orderId);
+                    cmd.Parameters.AddWithValue("@ItemId", orderItem.itemId);
                     orderItem.Id=(int)cmd.ExecuteScalar();
 
                 }

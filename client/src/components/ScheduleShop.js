@@ -38,7 +38,7 @@ export const ScheduleShop = ()=>{
                     <div style={{width:'15rem'}}>
                     <input
                         required autoFocus
-                        type="date"
+                        type="datetime-local"
                         className="form-control"
                         value={order.PickupDate}
                         onChange={

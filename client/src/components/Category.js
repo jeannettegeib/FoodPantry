@@ -9,10 +9,26 @@ import {
 import { submitCategoryItems } from "../modules/Category-ItemManager";
 
 
-export const Category = ({ category, familySize, submitState, orderId }) => {
+export const Category = ({ category, familySize, orderId, readyPackage, box }) => {
     const [itemQuantity, setItemQuantity] = useState({})
    
     let max = 0;
+
+    //make a function that maps through state and changeds each itemQuantity to a orderItem Object
+
+        const taco = () => {
+            const array = []
+            for(let i=0; i<findMax(); i++ ){
+                array.push({itemId: itemQuantity[`item${i}`], orderId: orderId})
+            }
+            const crazy = [...box]
+            crazy.push(array)
+            console.log(crazy)
+            readyPackage(crazy)
+
+        }
+        
+
  
     useEffect(() => {
         const burger = {}
@@ -23,17 +39,7 @@ export const Category = ({ category, familySize, submitState, orderId }) => {
         setItemQuantity(burger)
    
     }, [])
-    useEffect(()=>{
-        for(let i=0; i<findMax(); i++ ){
-        let orderItem={
-            orderId:orderId,
-            itemId: itemQuantity[i]
-        }
-        if(submitState==true){
-            submitCategoryItems(orderItem)
-
-        }}
-    },[submitState])
+  
 
     const findMax = () => {
 
@@ -101,6 +107,7 @@ export const Category = ({ category, familySize, submitState, orderId }) => {
 
                         })
                     }
+                    <button onClick={taco}>Add to order</button>
                 </AccordionBody>
             </AccordionItem>
         </center>

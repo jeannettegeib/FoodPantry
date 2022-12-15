@@ -28,6 +28,14 @@ namespace FoodPantry.Controllers
             return Ok (order);
         }
 
+        [HttpGet("GetWithItems/{id}")]
+        public IActionResult GetWithItems(int id)
+        {
+            var order = _orderRepository.GetOrderByIdWithItems(id);
+            if (order == null) { return NotFound(); }
+            return Ok(order);
+        }
+
 
         [HttpPost]
         public IActionResult Post(Order order)

@@ -14,14 +14,20 @@ namespace FoodPantry.Controllers
         {
             _orderItemRepository = orderItemRepository;
         }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return NoContent(); 
+        }
         
-        //[HttpGet]
 
         [HttpPost]
         public IActionResult Post(OrderItem orderItem)
         {
             _orderItemRepository.PostOrderItem(orderItem);
-            return CreatedAtAction("Get", new { id = orderItem.Id }, orderItem);
+            //return CreatedAtAction("Get", new { id = orderItem.Id }, orderItem);
+            return NoContent();
         }
 
             

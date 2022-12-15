@@ -22,10 +22,15 @@ export const SubmitOrder=(order)=>{
     },
     body:JSON.stringify(order)
     })
-    .then(r=>r.JSON())
+    .then(r=>r.json())
 }
 
-export const getOrderById=(id)=>{
-    return fetch(`https://localhost:5001/api/Order/${id}`)
-    .then(r=>r.JSON())
+export const getOrderById=(orderId)=>{
+    return fetch(`https://localhost:5001/api/Order/${orderId}`)
+    .then(r => r.json())
+}
+
+export const getOrderByIdWithItems=(orderId)=>{
+    return fetch(`https://localhost:5001/api/Order/${orderId}`)
+    .then(r => r.json())
 }
