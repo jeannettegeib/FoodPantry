@@ -11,5 +11,9 @@ export const submitCategoryItems=(orderItem)=>{
         body: JSON.stringify(orderItem)
     })
     .then(r=>r.json())
+}
 
+export const getCategoryByIdWithItems=(categoryId)=>{
+    return fetch(`https://localhost:5001/api/Category/${categoryId}`)
+    .then(r=>r.json())
 }

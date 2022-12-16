@@ -30,6 +30,14 @@ namespace FoodPantry.Controllers
             return NoContent();
         }
 
+        [HttpPut]
+        public IActionResult Update(int orderItemId, int newItemId)
+        {
+            _orderItemRepository.UpdateOrderItem(orderItemId, newItemId);
+            return NoContent();
+
+        }
+
             
     }
 }

@@ -34,3 +34,21 @@ export const getOrderByIdWithItems=(orderId)=>{
     return fetch(`https://localhost:5001/api/Order/GetWithItems/${orderId}`)
     .then(r => r.json())
 }
+
+export const getOrdersByShopper=(shopperId)=>{
+    return fetch(`https://localhost:5001/api/Order/GetOrdersByUserId/${shopperId}
+    `)
+    .then(r=>r.json())
+}
+
+export const updateOrderItem=(orderItem, newItemId)=>{
+   
+    return fetch(`https://localhost:5001/api/OrderItem?orderItemId=${orderItem.id}&newItemId=${newItemId}`,{
+        method: "PUT",
+        headers:{
+            "Content-type":"application/json"
+        },
+        body:JSON.stringify(orderItem)
+        })
+        .then(r=>r.json())
+}

@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Connections;
 using System.ComponentModel.Design;
 using System.Reflection.Metadata.Ecma335;
+using System.Reflection.PortableExecutable;
 
 namespace FoodPantry.Repositories
 {
@@ -85,8 +86,8 @@ namespace FoodPantry.Repositories
                     var reader = cmd.ExecuteReader();
 
                     Order order = null;
-                    List<Item> Items = new List<Item>();
-                    Item item = null;
+                    List<OrderItem> Items = new List<OrderItem>();
+                    OrderItem item = null;
                     while (reader.Read())
                     {
                         if(order == null)
@@ -124,9 +125,11 @@ namespace FoodPantry.Repositories
                             
                             if (!reader.IsDBNull(reader.GetOrdinal("ItemID")))
                             { 
-                                item = new Item
+                                item = new OrderItem
                                 {
-                                    Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
+                                    Id = reader.GetInt32(reader.GetOrdinal("OrderItemID")),
+                                    orderId= reader.GetInt32(reader.GetOrdinal("orderId")),
+                                    itemId= reader.GetInt32(reader.GetOrdinal("itemId")),
                                     Name = reader.GetString(reader.GetOrdinal("item")),
                                     CategoryId = reader.GetInt32(reader.GetOrdinal("categoryId"))
                                 };
@@ -151,9 +154,12 @@ namespace FoodPantry.Repositories
                         }
                         else
                         {
-                            order.Items.Add(new Item()
+                            order.Items.Add(new OrderItem()
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
+
+                                Id = reader.GetInt32(reader.GetOrdinal("OrderItemID")),
+                                orderId = reader.GetInt32(reader.GetOrdinal("orderId")),
+                                itemId = reader.GetInt32(reader.GetOrdinal("itemId")),
                                 Name = reader.GetString(reader.GetOrdinal("item")),
                                 CategoryId = reader.GetInt32(reader.GetOrdinal("categoryId")),
                                 Weight = reader.GetDouble(reader.GetOrdinal("weight")),
@@ -254,24 +260,56 @@ namespace FoodPantry.Repositories
 
             }
 
-        //public void PostOrderItem(OrderItem orderItem)
-        //{
-        //    using(var conn=Connection)
-        //    {
-        //        conn.Open();
-        //        using(var cmd=conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"INSERT INTO OrderItem (orderId, itemId)
-        //                            OUTPUT INSERTED.ID 
-        //                            VALUES (@OrderId,@ItemId)";
-        //            cmd.Parameters.AddWithValue("@OrderId", orderItem.OrderId);
-        //            cmd.Parameters.AddWithValue("@ItemId", orderItem.ItemId);
+        public List<Order> GetOrdersByUserId(int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT id, shopperUserId, orderSubmitted, pickupDate, employeeUserId, inStore, complete FROM [Order] 
+                                        WHERE shopperUserId =@UserId AND orderSubmitted IS NOT Null
+                                        ORDER BY orderSubmitted DESC;";     
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    var reader=cmd.ExecuteReader();
 
-        //        }
-        //    }
-        //}
+                    List<Order> orders = new List<Order>();
+                    Order order = null;
 
-
+                    while(reader.Read())
+                    {
+                        order = new Order()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("id")),
+                            ShopperUserId = reader.GetInt32(reader.GetOrdinal("shopperUserId")),
+                            OrderSubmitted = reader.GetDateTime(reader.GetOrdinal("orderSubmitted")),
+                            PickupDate = reader.GetDateTime(reader.GetOrdinal("pickupDate"))
+                        };
+                        if (!reader.IsDBNull(reader.GetOrdinal("employeeUserId")))
+                        {
+                            order.EmployeeUserId = reader.GetInt32(reader.GetOrdinal("employeeUserId"));
+                        }
+                        if (!reader.IsDBNull(reader.GetOrdinal("employeeUserId")))
+                        {
+                            order.EmployeeUserId = reader.GetInt32(reader.GetOrdinal("employeeUserId"));
+                        }
+                        if (!reader.IsDBNull(reader.GetOrdinal("inStore")))
+                        {
+                            order.InStore = reader.GetBoolean(reader.GetOrdinal("inStore"));
+                        }
+                        if (!reader.IsDBNull(reader.GetOrdinal("complete")))
+                        {
+                            order.Complete = reader.GetBoolean(reader.GetOrdinal("complete"));
+                        }
+                        orders.Add(order);
+                    }
+                    reader.Close();
+                    return orders;
+                }
+            }
         }
+
+
+    }
     }
 

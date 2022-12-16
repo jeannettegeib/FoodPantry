@@ -36,6 +36,14 @@ namespace FoodPantry.Controllers
             return Ok(order);
         }
 
+        [HttpGet("GetOrdersByUserId/{userId}")]
+        public IActionResult GetOrdersByUserId(int userId)
+        {
+            var orders = _orderRepository.GetOrdersByUserId(userId);
+            if(orders == null) { return NotFound(); }
+            return Ok(orders);
+        }
+
 
         [HttpPost]
         public IActionResult Post(Order order)

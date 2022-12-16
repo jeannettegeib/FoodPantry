@@ -10,7 +10,9 @@ namespace FoodPantry.Repositories
         public Order GetOrderById(int orderId);
         public void SubmitOrder(Order order);
         public List<Order> ListAllSubmittedOrders();
-       
+        public List<Order> GetOrdersByUserId(int userId);
+
+
 
     }
 }

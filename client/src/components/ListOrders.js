@@ -24,7 +24,7 @@ export const ListOrders=()=>{
                 <>
                 <center>
                 <Link to={`/order/${order.id}`}>
-                <Card style={{ width: '30rem', margin: '10px' }}>pickup date: {format(parseJSON(order.pickupDate), 'MM/dd/yyyy H:mm b..bb')}</Card>
+                <Card style={{ width: '30rem', margin: '10px' }}>pickup date: {format(parseJSON(order.pickupDate), 'MM/dd/yyyy H:mm ')}</Card>
                 </Link>
                 </center>
                 </>

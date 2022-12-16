@@ -23,5 +23,25 @@ namespace FoodPantry.Repositories
                 }
             }
         }
+
+
+        public void UpdateOrderItem(int orderItemId, int newItemId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE OrderItem SET itemId = @newItemId
+                                        WHERE id = @orderItemId";
+                    cmd.Parameters.AddWithValue("@newItemId", newItemId);
+                    cmd.Parameters.AddWithValue("@orderItemId", orderItemId);
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
+
+
     }
 }
