@@ -9,8 +9,9 @@ import { SwapOrderItem } from "./SwapOrderItem";
 
 export const Order =()=>{
     const [order, setOrder]=useState({})
-
+    const [refresh, setRefresh]=useState(false)
     const {orderId}=useParams();
+    const user=getCurrentUser();
 
     
     
@@ -18,8 +19,8 @@ export const Order =()=>{
         getOrderByIdWithItems(orderId)
         .then((orderObject)=>{setOrder(orderObject)
         })                       
-    },[orderId])
-
+    },[orderId, refresh])
+console.log("Order Items", order.items)
     return(
     <>
         <h1>Order # {order.id}</h1>
@@ -30,12 +31,20 @@ export const Order =()=>{
                 
                 return(
                     <>
-                    <OrderItem key={item.id} item={item} order={order}/>
+                    <OrderItem key={item.id} item={item} order={order} setRefresh={setRefresh}/>
                    
                     </>
                 )
             })}
         </ListGroup>
+        {
+            user.userType==3
+            ?
+            ""
+            :
+            <Button>Order Fullfilled</Button>
+        }
+
         </div>
         </center>
     </>

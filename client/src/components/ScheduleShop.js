@@ -15,7 +15,7 @@ export const ScheduleShop = ()=>{
         setShopper(getCurrentUser())
             
     },[])
- 
+    console.log(new Date())
     let shopperId=shopper.id;
     const handleSaveButtonClick=(clickEvent)=>{
         

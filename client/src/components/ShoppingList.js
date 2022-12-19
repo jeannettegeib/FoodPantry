@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { UncontrolledAccordion } from "reactstrap";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button, UncontrolledAccordion } from "reactstrap";
 import { getAllCategories, submitCategoryItems } from "../modules/Category-ItemManager";
 import { getOrderById, SubmitOrder } from "../modules/OrderManager";
 import { getCurrentUser, getUserById } from "../modules/UserManager";
@@ -16,6 +16,7 @@ export const ShoppingList=()=>{
 
     const shopper = getCurrentUser();
     const {orderId}=useParams();
+    const navigate=useNavigate();
   
     useEffect(()=>{
         getAllCategories()
@@ -25,6 +26,7 @@ export const ShoppingList=()=>{
     useEffect(()=>{
         getOrderById(orderId)
         .then((order)=>{setOrder(order)})
+        
     },[])
 
 
@@ -42,19 +44,23 @@ export const ShoppingList=()=>{
                 //map through the array of orderItems to submit each one to the orderItems bridge table.
                 ready4ship.flatMap(orderItemObject=>orderItemObject).map(orderItem=>submitCategoryItems(orderItem)) 
             ]
-        ) 
+        )
+        .then(window.alert("Order Submitted!"))        
+        .then(navigate("/MyOrders"))
     }
 
 
     return(
     <>
         <h1>Hi {shopper.firstName} {shopper.lastName}</h1>
-        {/* <form> */}
+        <p>&nbsp;</p>
+      
         {categoryList.map((category)=>
             {
                 return(
-                    <>
-                    <UncontrolledAccordion stayOpen>
+                    <div className="categoryList">
+                        
+                    <UncontrolledAccordion>
                     <Category
                     key = {`category--${category.id}`}
                     category = {category}
@@ -64,11 +70,11 @@ export const ShoppingList=()=>{
                     box={ready4ship}
                      />
                     </UncontrolledAccordion>
-                    </>         
+                    </div>         
             )
             }
             )}
-            <button onClick={(event)=>handleSubmitOrder(event)}>Submit Order</button>
+            <Button onClick={(event)=>handleSubmitOrder(event)}>Submit Order</Button>
         {/* </form> */}
         
     </>

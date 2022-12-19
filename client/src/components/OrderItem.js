@@ -4,7 +4,7 @@ import { Button, ListGroupItem } from "reactstrap"
 import { getCurrentUser } from "../modules/UserManager";
 import { SwapOrderItem } from "./SwapOrderItem";
 
-export const OrderItem=({item, order})=>{
+export const OrderItem=({item, order, setRefresh})=>{
     const loggedInUser=getCurrentUser();
     const [buttonClick, setButtonClick]=useState(false)
 
@@ -17,7 +17,7 @@ export const OrderItem=({item, order})=>{
                 {
                     buttonClick
                     ?
-                    <SwapOrderItem OrderItem={itemObject} ButtonSetter={setButtonClick}/>
+                    <SwapOrderItem OrderItem={itemObject} ButtonSetter={setButtonClick} setRefresh={setRefresh}/>
                     :
                     ""
                 }

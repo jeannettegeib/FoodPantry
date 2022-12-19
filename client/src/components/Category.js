@@ -11,6 +11,7 @@ import { submitCategoryItems } from "../modules/Category-ItemManager";
 
 export const Category = ({ category, familySize, orderId, readyPackage, box }) => {
     const [itemQuantity, setItemQuantity] = useState({})
+    const [clicked, setClicked] = useState(false);
    
     let max = 0;
 
@@ -25,6 +26,7 @@ export const Category = ({ category, familySize, orderId, readyPackage, box }) =
             crazy.push(array)
             console.log(crazy)
             readyPackage(crazy)
+            setClicked(true)
 
         }
         
@@ -80,9 +82,16 @@ export const Category = ({ category, familySize, orderId, readyPackage, box }) =
 
     }
 
-    return (<>
+    return (
+    <>
         <center>
-
+            
+            {
+            clicked 
+            ?
+            <div className="feedback">{category.name} choices added to order.</div>
+            :
+            
             <AccordionItem style={{ width: '30rem' }}>
 
                 <AccordionHeader targetId="{category.id}">
@@ -107,9 +116,14 @@ export const Category = ({ category, familySize, orderId, readyPackage, box }) =
 
                         })
                     }
-                    <button onClick={taco}>Add to order</button>
+                   
+                        <button onClick={taco}>Add to order</button>
+                    
+                    
                 </AccordionBody>
             </AccordionItem>
+            }
+            
         </center>
         <br></br>
     </>

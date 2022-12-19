@@ -171,17 +171,28 @@ namespace FoodPantry.Repositories
                         }
                         else
                         {
-                            category.Items.Add(new Item()
+                            Item item = new Item
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("ItemID")),
                                 Name = reader.GetString(reader.GetOrdinal("item")),
-                                CategoryId = reader.GetInt32(reader.GetOrdinal("ItemCategory")),
-                                Weight = reader.GetDouble(reader.GetOrdinal("weight")),
-                                FoodTypeId = reader.GetInt32(reader.GetOrdinal("foodTypeId")),
-                                Image = reader.GetString(reader.GetOrdinal("image")),
-                                Quantity = reader.GetInt32(reader.GetOrdinal("quantity"))
+                                CategoryId = reader.GetInt32(reader.GetOrdinal("ItemCategory"))
+                            };
 
-                            });
+                            if (!reader.IsDBNull(reader.GetOrdinal("weight"))) { item.Weight = reader.GetDouble(reader.GetOrdinal("weight")); }
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("foodTypeId")))
+                            {
+                                item.FoodTypeId = reader.GetInt32(reader.GetOrdinal("foodTypeId"));
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("image")))
+                            {
+                                item.Image = reader.GetString(reader.GetOrdinal("image"));
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("quantity")))
+                            {
+                                item.Quantity = reader.GetInt32(reader.GetOrdinal("quantity"));
+                            }
+                            category.Items.Add(item);
                         }
                     }
                     reader.Close();
