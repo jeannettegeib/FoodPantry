@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../modules/UserManager";
 import {Link,  useNavigate} from "react-router-dom";
+import { Button } from "reactstrap";
 
 const Login =({setIsLoggedIn})=>{
     const [username, setUsername] = useState("");
@@ -40,9 +41,9 @@ const Login =({setIsLoggedIn})=>{
                 name="password"
                 placeholder="password"
               /></div>            
-              <button type="submit" onClick={submitLoginForm}>
+              <Button type="submit" onClick={submitLoginForm}>
                 Log In
-              </button>
+              </Button>
             </form>
             
           </>

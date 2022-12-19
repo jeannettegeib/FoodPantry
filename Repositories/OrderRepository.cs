@@ -125,49 +125,60 @@ namespace FoodPantry.Repositories
                             
                             if (!reader.IsDBNull(reader.GetOrdinal("ItemID")))
                             { 
-                                item = new OrderItem
-                                {
-                                    Id = reader.GetInt32(reader.GetOrdinal("OrderItemID")),
-                                    orderId= reader.GetInt32(reader.GetOrdinal("orderId")),
-                                    itemId= reader.GetInt32(reader.GetOrdinal("itemId")),
-                                    Name = reader.GetString(reader.GetOrdinal("item")),
-                                    CategoryId = reader.GetInt32(reader.GetOrdinal("categoryId"))
-                                };
-                            
-                                if (!reader.IsDBNull(reader.GetOrdinal("weight"))) { item.Weight = reader.GetDouble(reader.GetOrdinal("weight")); }
-
-                                if (!reader.IsDBNull(reader.GetOrdinal("foodTypeId")))
-                                {
-                                    item.FoodTypeId = reader.GetInt32(reader.GetOrdinal("foodTypeId"));
-                                }
-                                if (!reader.IsDBNull(reader.GetOrdinal("image")))
-                                {
-                                    item.Image = reader.GetString(reader.GetOrdinal("image"));
-                                }
-                                if (!reader.IsDBNull(reader.GetOrdinal("quantity")))
-                                {
-                                    item.Quantity = reader.GetInt32(reader.GetOrdinal("quantity"));
-                                }
-                                order.Items.Add(item);
+                               
                             }
-
-                        }
-                        else
-                        {
-                            order.Items.Add(new OrderItem()
+                            item = new OrderItem
                             {
-
                                 Id = reader.GetInt32(reader.GetOrdinal("OrderItemID")),
                                 orderId = reader.GetInt32(reader.GetOrdinal("orderId")),
                                 itemId = reader.GetInt32(reader.GetOrdinal("itemId")),
                                 Name = reader.GetString(reader.GetOrdinal("item")),
-                                CategoryId = reader.GetInt32(reader.GetOrdinal("categoryId")),
-                                Weight = reader.GetDouble(reader.GetOrdinal("weight")),
-                                FoodTypeId = reader.GetInt32(reader.GetOrdinal("foodTypeId")),
-                                Image = reader.GetString(reader.GetOrdinal("image")),
-                                Quantity = reader.GetInt32(reader.GetOrdinal("quantity"))
+                                CategoryId = reader.GetInt32(reader.GetOrdinal("categoryId"))
+                            };
 
-                            });
+                            if (!reader.IsDBNull(reader.GetOrdinal("weight"))) { item.Weight = reader.GetDouble(reader.GetOrdinal("weight")); }
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("foodTypeId")))
+                            {
+                                item.FoodTypeId = reader.GetInt32(reader.GetOrdinal("foodTypeId"));
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("image")))
+                            {
+                                item.Image = reader.GetString(reader.GetOrdinal("image"));
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("quantity")))
+                            {
+                                item.Quantity = reader.GetInt32(reader.GetOrdinal("quantity"));
+                            }
+                            order.Items.Add(item);
+
+                        }
+                        else
+                        {
+                            item = new OrderItem
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("OrderItemID")),
+                                orderId = reader.GetInt32(reader.GetOrdinal("orderId")),
+                                itemId = reader.GetInt32(reader.GetOrdinal("itemId")),
+                                Name = reader.GetString(reader.GetOrdinal("item")),
+                                CategoryId = reader.GetInt32(reader.GetOrdinal("categoryId"))
+                            };
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("weight"))) { item.Weight = reader.GetDouble(reader.GetOrdinal("weight")); }
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("foodTypeId")))
+                            {
+                                item.FoodTypeId = reader.GetInt32(reader.GetOrdinal("foodTypeId"));
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("image")))
+                            {
+                                item.Image = reader.GetString(reader.GetOrdinal("image"));
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("quantity")))
+                            {
+                                item.Quantity = reader.GetInt32(reader.GetOrdinal("quantity"));
+                            }
+                            order.Items.Add(item);
                         }
 
                     }
@@ -204,14 +215,35 @@ namespace FoodPantry.Repositories
                 {
                     DateTime now = DateTime.Now;
 
-                    cmd.CommandText = @"UPDATE [Order] SET orderSubmitted = @now WHERE id = @orderId";
+                    cmd.CommandText = @"UPDATE [Order] SET orderSubmitted = @orderSubmitted, complete=@complete,  pickupDate=@pickupDate,  inStore=@inStore WHERE id = @orderId";
                     cmd.Parameters.AddWithValue("@orderId", order.Id);
-                    cmd.Parameters.AddWithValue("@now", now);
+                    cmd.Parameters.AddWithValue("@orderSubmitted", now);
+                    cmd.Parameters.AddWithValue("@complete", order.Complete);
+                    cmd.Parameters.AddWithValue("@pickupDate", order.PickupDate);
+                    
+                    cmd.Parameters.AddWithValue("@inStore", order.InStore);
                     cmd.ExecuteNonQuery();
                 }
 
             }
         }
+
+        public void CompleteOrder(Order order)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE [Order] SET complete=1 WHERE id = @orderId";
+                    cmd.Parameters.AddWithValue("@orderId", order.Id);
+                    
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
+
 
         public List<Order> ListAllSubmittedOrders()
         {

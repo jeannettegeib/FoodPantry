@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+.navbar-color{
+  background-color: #e28633;
+  color: white;
+}
+.navbar-brand{
+  color: white;
+  font-family:'Times New Roman', Times, serif;
+}
+body {
+  font-family: Raleway,sans-serif;
+  color: #51565a;
+  letter-spacing: .5px;
+}
+h1{
+  font-family:'Times New Roman', Times, serif;
+
+}
+.feedback {
+  border: 1px dotted #e28633;
+  color: white;
+  padding: 1rem;
+  background-color: #5e3e63;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  width: 30rem;
+  transform: translate(-50%, -50%);
+  animation: 1s slideDown;
+}
+@keyframes slideDown {
+  0% {
+    top: 0%;
+  }
+
+  100% {
+    top: 25%;
+  }
+}
+
+

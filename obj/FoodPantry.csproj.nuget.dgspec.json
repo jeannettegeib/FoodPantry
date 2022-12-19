@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jeanette\\workspace\\FoodPantry\\FoodPantry.csproj": {}
+    "C:\\Users\\Jeannette\\workspace\\FoodPantry\\FoodPantry.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jeanette\\workspace\\FoodPantry\\FoodPantry.csproj": {
+    "C:\\Users\\Jeannette\\workspace\\FoodPantry\\FoodPantry.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jeanette\\workspace\\FoodPantry\\FoodPantry.csproj",
+        "projectUniqueName": "C:\\Users\\Jeannette\\workspace\\FoodPantry\\FoodPantry.csproj",
         "projectName": "FoodPantry",
-        "projectPath": "C:\\Users\\Jeanette\\workspace\\FoodPantry\\FoodPantry.csproj",
-        "packagesPath": "C:\\Users\\Jeanette\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jeanette\\workspace\\FoodPantry\\obj\\",
+        "projectPath": "C:\\Users\\Jeannette\\workspace\\FoodPantry\\FoodPantry.csproj",
+        "packagesPath": "C:\\Users\\Jeannette\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jeannette\\workspace\\FoodPantry\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Jeanette\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Jeannette\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -67,8 +62,20 @@
           "warn": true,
           "downloadDependencies": [
             {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Host.win-x64",
               "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
             }
           ],
           "frameworkReferences": {
@@ -79,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

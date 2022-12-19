@@ -4,7 +4,7 @@ import { Button } from "reactstrap"
 import { getCategoryByIdWithItems } from "../modules/Category-ItemManager"
 import { updateOrderItem } from "../modules/OrderManager"
 
-export const SwapOrderItem=({OrderItem, ButtonSetter})=>{
+export const SwapOrderItem=({OrderItem, ButtonSetter, setRefresh})=>{
     const [relatedItems, setRelatedItems]=useState([])
     const [newItemId, setNewItemId]=useState({})
     const navigate=useNavigate();
@@ -21,10 +21,12 @@ export const SwapOrderItem=({OrderItem, ButtonSetter})=>{
     const updateItemChoice=(event)=>{
         console.log(OrderItem)
         event.preventDefault();
-        updateOrderItem(OrderItem, newItemId)
-        .then(ButtonSetter(false))
-        .then(window.alert("Selection Updated!"))        
-        .then(navigate(`/order/${OrderItem.orderId}`))
+        updateOrderItem(OrderItem, newItemId)        
+        .then(window.alert("Selection Updated!"))
+        .then(ButtonSetter(false)) 
+        .then(setRefresh(true))
+
+        // .then(navigate(`/order/${OrderItem.orderId}`))
     };
 
     return(
