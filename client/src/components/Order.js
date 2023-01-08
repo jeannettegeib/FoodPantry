@@ -20,9 +20,10 @@ export const Order =()=>{
         .then((orderObject)=>{setOrder(orderObject)
         })                       
     },[orderId, refresh])
+
 console.log("Order Items", order.items)
     return(
-    <>
+    <div className="content-container">
         <h1>Order # {order.id}</h1>
         <center>
         <div style={{ width: '20rem' }}>
@@ -47,6 +48,6 @@ console.log("Order Items", order.items)
 
         </div>
         </center>
-    </>
+    </div>
     )
 }

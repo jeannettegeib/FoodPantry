@@ -23,7 +23,8 @@ const Login =({setIsLoggedIn})=>{
 
     return (
         <>
-          <>
+          <div className="login content-container">
+          <div className="login-text">
             <h2>Log In</h2>
             <form>
                 <div>
@@ -45,8 +46,8 @@ const Login =({setIsLoggedIn})=>{
                 Log In
               </Button>
             </form>
-            
-          </>
+            </div>
+          </div>
         </>
       );
 }

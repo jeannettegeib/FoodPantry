@@ -9,7 +9,7 @@ const Header =()=>{
     return (
       <nav className="navbar navbar-expand navbar-color">
         <Link to="/" className="navbar-brand" ><font color={"white"}>
-          <img src="https://jfcspittsburgh.wpenginepowered.com/wp-content/themes/jfcs/img/favicon.ico" width={25}></img>Squirrel Hill Food Pantry
+          <img src="https://jfcspittsburgh.wpenginepowered.com/wp-content/uploads/2017/11/JFCS_Logo_SquirrelHillFoodPantry_White.svg" height={55}></img> 
         </font></Link>
         <ul className="navbar-nav mr-auto">
           {

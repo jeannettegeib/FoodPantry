@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "reactstrap";
+import { Button, Card, CardBody, CardHeader, CardImg, CardImgOverlay, CardTitle } from "reactstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { OpenEmptyOrderForShopper } from "../modules/OrderManager";
 import { getCurrentUser } from "../modules/UserManager";
 
@@ -26,12 +27,20 @@ export const ScheduleShop = ()=>{
     }
 
 
-    return(
-        <>
-        <center>
-        <h1>Welcome, {shopper.firstName} {shopper.lastName}!</h1>
-       
-        <div>Would you like to schedule a pickup for your family of {shopper.familySize} at the Squirrel Hill Food Pantry?</div>
+    return(<center>
+        <div className="content-container" style={{
+            display: 'block', width: "60%", maxWidth: 650, padding: 30
+        }}>
+        
+            <Card>
+                <CardImg  src="https://jfcspittsburgh.wpenginepowered.com/wp-content/uploads/2017/10/Food-Pantry-1.jpg"></CardImg>
+                <CardBody>
+                <CardImgOverlay>
+                <CardTitle className="scheduleShopTitle">
+                Welcome, {shopper.firstName}!
+                </CardTitle>
+                </CardImgOverlay>
+        <div>Would you like to schedule a food pickup for your family of {shopper.familySize} at the Squirrel Hill Food Pantry?</div>
         <p></p>
         <div className="form-group">
                     <label>Select a pickup date to get started with your order. </label>
@@ -55,7 +64,9 @@ export const ScheduleShop = ()=>{
                 Save Date
             </Button>
             </div>
-        </center>
-        </>
+            </CardBody>
+            </Card>
+        
+        </div></center>
     )
 }

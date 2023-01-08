@@ -53,6 +53,7 @@ export const ShoppingList=()=>{
     return(
     <>
         <h1>Hi {shopper.firstName} {shopper.lastName}</h1>
+        <div>Please select the items you would like to order from each category.</div>
         <p>&nbsp;</p>
       
         {categoryList.map((category)=>

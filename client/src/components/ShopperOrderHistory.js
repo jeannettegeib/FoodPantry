@@ -17,7 +17,7 @@ export const ShopperOrderHistory=()=>{
     },[])
 
     return (
-        <>
+        <div className="content-container">
             <h1>{shopper.lastName} Family Order History</h1>
             <center>
             <div>
@@ -47,6 +47,6 @@ export const ShopperOrderHistory=()=>{
                 
             </div>
             </center>
-        </>
+        </div>
     )
 }

@@ -5,6 +5,7 @@ import { getCategoryByIdWithItems } from "../modules/Category-ItemManager"
 import { updateOrderItem } from "../modules/OrderManager"
 
 export const SwapOrderItem=({OrderItem, ButtonSetter, setRefresh})=>{
+    // const [modal, setModal] = React.useState(false);
     const [relatedItems, setRelatedItems]=useState([])
     const [newItemId, setNewItemId]=useState({})
     const navigate=useNavigate();

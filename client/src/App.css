@@ -45,6 +45,7 @@
   font-family:'Times New Roman', Times, serif;
 }
 body {
+  background-color:  #e28633;
   font-family: Raleway,sans-serif;
   color: #51565a;
   letter-spacing: .5px;
@@ -56,10 +57,10 @@ h1{
 .feedback {
   border: 1px dotted #e28633;
   color: white;
-  padding: 1rem;
+  padding: 0.8rem;
   background-color: #5e3e63;
   position: absolute;
-  top: 25%;
+  top: 27%;
   left: 50%;
   width: 30rem;
   transform: translate(-50%, -50%);
@@ -75,4 +76,45 @@ h1{
   }
 }
 
+.login{
+  background-image: url("https://jfcspittsburgh.wpenginepowered.com/wp-content/uploads/2017/10/Food-Pantry-1.jpg");  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.login-text {
+  text-align: center;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-30%, -50%);
+  color: white;
+}
 
+.scheduleShopTitle{
+  text-align: left;
+  color: white; 
+  font-size: 2.6vmax;
+  vertical-align: middle;
+  padding: 10% 0;
+  
+}
+.content-container {
+  min-height: calc(100vh - 173px);
+}
+.footer--pin {
+  position: relative;
+  left: 0;
+  bottom: 0;
+}
+.navText{
+  color: white;
+  font-family:'Times New Roman', Times, serif;
+  font-size: x-small;
+
+}
+.footer{
+  
+  background-color: #603F64;
+}

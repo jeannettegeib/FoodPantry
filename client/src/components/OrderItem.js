@@ -1,13 +1,14 @@
 import { isFuture, parseJSON } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, ListGroupItem } from "reactstrap"
 import { getCurrentUser } from "../modules/UserManager";
 import { SwapOrderItem } from "./SwapOrderItem";
 
 export const OrderItem=({item, order, setRefresh})=>{
     const loggedInUser=getCurrentUser();
+    
     const [buttonClick, setButtonClick]=useState(false)
-
+    useEffect(()=>{},[])
     const updateItem=(itemObject)=>{
         if (loggedInUser.id==order.shopperUserId && isFuture(parseJSON(order.pickupDate)))
         {

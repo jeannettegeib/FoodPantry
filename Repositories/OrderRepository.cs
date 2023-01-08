@@ -81,7 +81,7 @@ namespace FoodPantry.Repositories
                                     LEFT JOIN OrderItem oi ON oi.orderId = o.id
                                     LEFT JOIN Item i ON oi.itemId = i.id
                                     WHERE o.id = @ID
-                                    ORDER BY i.id;";
+                                    ORDER BY i.categoryId;";
                     cmd.Parameters.AddWithValue("@ID", orderId);
                     var reader = cmd.ExecuteReader();
 
